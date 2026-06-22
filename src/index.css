@@ -597,30 +597,30 @@ h1, h2, h3, h4 {
 }
 
 .room-price {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--primary);
 }
 
 .room-price span {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: var(--text-muted);
 }
 
 .room-book-link {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--primary);
-  background-color: transparent;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
   border: 1.5px solid var(--primary);
-  padding: 8px 18px;
-  border-radius: 30px;
+  background-color: transparent;
+  color: var(--primary);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
   cursor: pointer;
   transition: var(--transition);
+  flex-shrink: 0; /* Prevents the circle button from shrinking/squishing into an ellipse */
 }
 
 .room-book-link:hover {
@@ -628,7 +628,7 @@ h1, h2, h3, h4 {
   color: var(--bg-white);
   border-color: var(--primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(10, 28, 62, 0.15);
+  box-shadow: 0 4px 10px rgba(10, 28, 62, 0.2);
 }
 
 @media (max-width: 1024px) {

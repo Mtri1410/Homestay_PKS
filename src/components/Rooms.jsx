@@ -1,5 +1,5 @@
 import React from 'react';
-import { Maximize2, Users, Star, ArrowRight } from 'lucide-react';
+import { Maximize2, Users, Star, Calendar } from 'lucide-react';
 
 export default function Rooms({ onBookSelect, t }) {
   const rooms = [
@@ -93,8 +93,9 @@ export default function Rooms({ onBookSelect, t }) {
                     <button 
                       className="room-book-link"
                       onClick={() => onBookSelect(room.title)}
+                      title={t.bookNow}
                     >
-                      {t.bookNow} <ArrowRight size={14} />
+                      <Calendar size={18} />
                     </button>
                   </div>
                 </div>
