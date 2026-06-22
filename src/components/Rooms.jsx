@@ -1,0 +1,110 @@
+import React from 'react';
+import { Maximize2, Users, Star, ArrowRight } from 'lucide-react';
+
+export default function Rooms({ onBookSelect }) {
+  const rooms = [
+    {
+      id: 'luxe-family-suite',
+      title: 'Luxe Family Suite',
+      image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
+      size: '55 m²',
+      guests: '4 Guests',
+      rating: '5.0 (28 reviews)',
+      price: '$120',
+      layout: 'large'
+    },
+    {
+      id: 'twin-cozy-suite',
+      title: 'Twin Cozy Suite',
+      image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80',
+      size: '35 m²',
+      guests: '2 Guests',
+      rating: '4.9 (18 reviews)',
+      price: '$80',
+      layout: 'small'
+    },
+    {
+      id: 'deluxe-double-room',
+      title: 'Deluxe Double Room',
+      image: 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80',
+      size: '42 m²',
+      guests: '2 Guests',
+      rating: '4.8 (24 reviews)',
+      price: '$95',
+      layout: 'large' // Spans left bottom
+    },
+    {
+      id: 'light-single-room',
+      title: 'Light Single Room',
+      image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
+      size: '25 m²',
+      guests: '1 Guest',
+      rating: '4.7 (12 reviews)',
+      price: '$55',
+      layout: 'small'
+    }
+  ];
+
+  return (
+    <section id="rooms" className="section-padding bg-light">
+      <div className="container">
+        <div className="rooms-header">
+          <div>
+            <span className="section-tag">Our Cabins</span>
+            <h2 className="section-title">Choose Your Cozy Space</h2>
+          </div>
+          <p className="rooms-header-right">
+            Every room at GenX PKS Homestay has been meticulously crafted with local pine wood, custom handcrafted furniture, and modern heating systems to guarantee a magical mountain stay.
+          </p>
+        </div>
+
+        <div className="rooms-grid">
+          {rooms.map((room) => {
+            const isLarge = room.layout === 'large';
+            return (
+              <div 
+                key={room.id} 
+                className={isLarge ? 'room-card-large' : 'room-card-small'}
+              >
+                <div className="room-img-container">
+                  <img src={room.image} alt={room.title} />
+                </div>
+                
+                <div className="room-info">
+                  <h3 className="room-title">{room.title}</h3>
+                  
+                  <div className="room-meta">
+                    <div className="room-meta-item">
+                      <Maximize2 size={16} />
+                      <span>{room.size}</span>
+                    </div>
+                    <div className="room-meta-item">
+                      <Users size={16} />
+                      <span>{room.guests}</span>
+                    </div>
+                    <div className="room-meta-item">
+                      <Star size={16} fill="#C5A880" stroke="#C5A880" />
+                      <span>{room.rating}</span>
+                    </div>
+                  </div>
+
+                  <div className="room-price-book">
+                    <div className="room-price">
+                      {room.price} <span>/ night</span>
+                    </div>
+                    <button 
+                      className="room-book-link"
+                      onClick={() => onBookSelect(room.title)}
+                    >
+                      Book Now <ArrowRight size={14} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
