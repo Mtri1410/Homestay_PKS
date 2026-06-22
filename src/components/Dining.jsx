@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Dining() {
+export default function Dining({ t }) {
   return (
     <section id="dining" className="section-padding container">
       <div className="dining-grid">
@@ -12,16 +12,12 @@ export default function Dining() {
         </div>
 
         <div className="dining-text">
-          <span className="section-tag">Taste of PKS</span>
-          <h2 className="section-title">Restaurant & Bar</h2>
-          <p className="dining-desc">
-            Savor the rich culinary heritage of the mountain region at our signature restaurant. We focus on farm-to-table cuisine, sourcing organic vegetables from local farmers, premium mountain meats, and crafting bespoke dishes that warm your soul.
-          </p>
-          <p className="dining-desc">
-            At night, gather at the GenX lounge bar to enjoy hand-selected red wines, local herbal teas, or custom cocktails mixed with mountain pine and berries, all while sitting by our open fireplace overlooking the starlit valley.
-          </p>
+          <span className="section-tag">{t.diningTag}</span>
+          <h2 className="section-title">{t.diningTitle}</h2>
+          <p className="dining-desc">{t.diningDesc1}</p>
+          <p className="dining-desc">{t.diningDesc2}</p>
           <a href="#about" className="btn btn-outline" style={{ marginTop: '10px' }}>
-            Discover Our Menu
+            {t.diningCta}
           </a>
         </div>
       </div>

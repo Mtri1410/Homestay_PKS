@@ -1,20 +1,16 @@
 import React from 'react';
 
-export default function Wellness() {
+export default function Wellness({ t }) {
   return (
     <section id="wellness" className="section-padding bg-light">
       <div className="container wellness-grid">
         <div className="wellness-text">
-          <span className="section-tag">Wellness & Spa</span>
-          <h2 className="section-title">Mission: Revival</h2>
-          <p className="wellness-desc">
-            Restore harmony to your body, mind, and spirit at our boutique spa. We offer a curated menu of treatments using natural local herbs, hot volcanic stones, and pure essential oils. Let our professional therapists guide you into a state of absolute relaxation.
-          </p>
-          <p className="wellness-desc">
-            From cleansing herbal baths to revitalizing deep tissue massages, every detail is engineered to relieve stress and re-energize your spirit during your mountain escape.
-          </p>
+          <span className="section-tag">{t.wellnessTag}</span>
+          <h2 className="section-title">{t.wellnessTitle}</h2>
+          <p className="wellness-desc">{t.wellnessDesc1}</p>
+          <p className="wellness-desc">{t.wellnessDesc2}</p>
           <a href="#about" className="btn btn-outline" style={{ marginTop: '10px' }}>
-            Learn More
+            {t.wellnessCta}
           </a>
         </div>
 

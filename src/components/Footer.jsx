@@ -28,7 +28,7 @@ const Youtube = ({ size = 20 }) => (
   </svg>
 );
 
-export default function Footer() {
+export default function Footer({ t }) {
   const currentYear = new Date().getFullYear();
 
   const handleLinkClick = (id) => {
@@ -48,9 +48,7 @@ export default function Footer() {
           <div className="footer-logo">
             GenX <span>PKS</span>
           </div>
-          <p className="footer-desc">
-            A premium mountain homestay operated by the GenX PKS Company. We specialize in creating high-end, cozy retreat experiences nestled deep within natural pine forests and majestic mountain valleys.
-          </p>
+          <p className="footer-desc">{t.footerDesc}</p>
           <div className="social-links">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon">
               <Facebook size={18} />
@@ -69,39 +67,38 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h4 className="footer-col-title">Quick Links</h4>
+          <h4 className="footer-col-title">{t.guestsCount === 'Khách' ? 'Liên kết nhanh' : 'Quick Links'}</h4>
           <ul className="footer-links">
             <li className="footer-link-item">
-              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('hero')}>Home</span>
+              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('hero')}>{t.home}</span>
             </li>
             <li className="footer-link-item">
-              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('about')}>About Us</span>
+              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('about')}>{t.about}</span>
             </li>
             <li className="footer-link-item">
-              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('rooms')}>Our Cabins</span>
+              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('rooms')}>{t.rooms}</span>
             </li>
             <li className="footer-link-item">
-              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('dining')}>Dining</span>
+              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('dining')}>{t.dining}</span>
             </li>
             <li className="footer-link-item">
-              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('wellness')}>Wellness Spa</span>
+              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('wellness')}>{t.wellness}</span>
             </li>
             <li className="footer-link-item">
-              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('blog')}>Blog & Guides</span>
+              <span className="footer-link" style={{ cursor: 'pointer' }} onClick={() => handleLinkClick('blog')}>{t.blog}</span>
             </li>
           </ul>
         </div>
 
         {/* Contact Info */}
         <div>
-          <h4 className="footer-col-title">Get In Touch</h4>
+          <h4 className="footer-col-title">{t.guestsCount === 'Khách' ? 'Liên hệ' : 'Get In Touch'}</h4>
           <div className="contact-info">
             <div className="contact-item">
               <MapPin size={20} />
               <div className="contact-item-text">
-                <strong>GenX PKS Head Office:</strong><br />
-                76 C Aulyah Road, Da Lat City,<br />
-                Lam Dong Province, Vietnam
+                <strong>{t.footerOffice}</strong><br />
+                {t.footerAddress}
               </div>
             </div>
             <div className="contact-item">
@@ -122,10 +119,10 @@ export default function Footer() {
 
       <div className="container footer-bottom">
         <div>
-          &copy; {currentYear} GenX PKS Company. All rights reserved.
+          &copy; {currentYear} GenX PKS Company. {t.footerRights}
         </div>
         <div>
-          Privacy Policy &bull; Terms of Service &bull; Sitemap
+          {t.footerTerms}
         </div>
       </div>
     </footer>

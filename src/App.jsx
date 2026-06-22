@@ -9,10 +9,12 @@ import Blog from './components/Blog';
 import Instagram from './components/Instagram';
 import Footer from './components/Footer';
 import { X, Check } from 'lucide-react';
+import { translations } from './utils/translations';
 
 function App() {
+  const [language, setLanguage] = useState('vi'); // Defaults to Vietnamese
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRoom, setSelectedRoom] = useState('Luxe Family Suite');
+  const [selectedRoom, setSelectedRoom] = useState('Phòng Suite Gia đình Sang trọng');
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -23,8 +25,11 @@ function App() {
     guests: '2 Guests'
   });
 
+  const t = translations[language];
+
+  // Map default English room title to localized room title when selecting/triggering
   const handleBookClick = () => {
-    setSelectedRoom('Luxe Family Suite');
+    setSelectedRoom(t.roomLuxeFamily);
     setBookingSubmitted(false);
     setIsModalOpen(true);
   };
@@ -45,7 +50,6 @@ function App() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // Simulate booking process
     setBookingSubmitted(true);
   };
 
@@ -62,42 +66,55 @@ function App() {
     });
   };
 
+  // Format success messages with user inputs
+  const getSuccessDesc1 = () => {
+    return t.successDesc1
+      .replace('{name}', formData.fullName)
+      .replace('{room}', selectedRoom)
+      .replace('{email}', formData.email);
+  };
+
+  const getSuccessDesc2 = () => {
+    return t.successDesc2
+      .replace('{phone}', formData.phone);
+  };
+
   return (
     <>
-      <Header onBookClick={handleBookClick} />
-      <Hero onBookClick={handleBookClick} />
-      <About />
-      <Rooms onBookSelect={handleRoomSelect} />
-      <Dining />
-      <Wellness />
-      <Blog />
-      <Instagram />
-      <Footer />
+      <Header onBookClick={handleBookClick} language={language} setLanguage={setLanguage} t={t} />
+      <Hero onBookClick={handleBookClick} t={t} />
+      <About t={t} />
+      <Rooms onBookSelect={handleRoomSelect} t={t} />
+      <Dining t={t} />
+      <Wellness t={t} />
+      <Blog t={t} />
+      <Instagram t={t} />
+      <Footer t={t} />
 
       {/* Booking Modal */}
       {isModalOpen && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-overlay">
+          <div className="modal-content">
             <button className="modal-close-btn" onClick={closeModal}>
               <X size={24} />
             </button>
 
             {!bookingSubmitted ? (
               <>
-                <h3 className="modal-title">Book Your Retreat</h3>
+                <h3 className="modal-title">{t.modalTitle}</h3>
                 <p className="modal-desc">
-                  Fill in your details below to request a booking for the <strong>{selectedRoom}</strong>.
+                  {t.modalDesc} <strong>{selectedRoom}</strong>.
                 </p>
                 <form className="booking-form" onSubmit={handleFormSubmit}>
                   <div className="form-group">
-                    <label className="form-label" htmlFor="fullName">Full Name</label>
+                    <label className="form-label" htmlFor="fullName">{t.labelFullName}</label>
                     <input 
                       type="text" 
                       id="fullName" 
                       name="fullName" 
                       className="form-input" 
                       required 
-                      placeholder="John Doe"
+                      placeholder="Nguyễn Văn A"
                       value={formData.fullName}
                       onChange={handleInputChange}
                     />
@@ -105,27 +122,27 @@ function App() {
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label className="form-label" htmlFor="email">Email Address</label>
+                      <label className="form-label" htmlFor="email">{t.labelEmail}</label>
                       <input 
                         type="email" 
                         id="email" 
                         name="email" 
                         className="form-input" 
                         required 
-                        placeholder="john@example.com"
+                        placeholder="email@example.com"
                         value={formData.email}
                         onChange={handleInputChange}
                       />
                     </div>
                     <div className="form-group">
-                      <label className="form-label" htmlFor="phone">Phone Number</label>
+                      <label className="form-label" htmlFor="phone">{t.labelPhone}</label>
                       <input 
                         type="tel" 
                         id="phone" 
                         name="phone" 
                         className="form-input" 
                         required 
-                        placeholder="+84..."
+                        placeholder="+84 987 654 321"
                         value={formData.phone}
                         onChange={handleInputChange}
                       />
@@ -134,7 +151,7 @@ function App() {
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label className="form-label" htmlFor="checkIn">Check-In Date</label>
+                      <label className="form-label" htmlFor="checkIn">{t.labelCheckIn}</label>
                       <input 
                         type="date" 
                         id="checkIn" 
@@ -146,7 +163,7 @@ function App() {
                       />
                     </div>
                     <div className="form-group">
-                      <label className="form-label" htmlFor="checkOut">Check-Out Date</label>
+                      <label className="form-label" htmlFor="checkOut">{t.labelCheckOut}</label>
                       <input 
                         type="date" 
                         id="checkOut" 
@@ -161,7 +178,7 @@ function App() {
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label className="form-label" htmlFor="roomType">Selected Suite</label>
+                      <label className="form-label" htmlFor="roomType">{t.labelSuite}</label>
                       <select 
                         id="roomType" 
                         name="roomType" 
@@ -169,14 +186,14 @@ function App() {
                         value={selectedRoom}
                         onChange={(e) => setSelectedRoom(e.target.value)}
                       >
-                        <option value="Luxe Family Suite">Luxe Family Suite</option>
-                        <option value="Twin Cozy Suite">Twin Cozy Suite</option>
-                        <option value="Deluxe Double Room">Deluxe Double Room</option>
-                        <option value="Light Single Room">Light Single Room</option>
+                        <option value={t.roomLuxeFamily}>{t.roomLuxeFamily}</option>
+                        <option value={t.roomTwinCozy}>{t.roomTwinCozy}</option>
+                        <option value={t.roomDeluxeDouble}>{t.roomDeluxeDouble}</option>
+                        <option value={t.roomLightSingle}>{t.roomLightSingle}</option>
                       </select>
                     </div>
                     <div className="form-group">
-                      <label className="form-label" htmlFor="guests">Guests Count</label>
+                      <label className="form-label" htmlFor="guests">{t.labelGuests}</label>
                       <select 
                         id="guests" 
                         name="guests" 
@@ -184,10 +201,10 @@ function App() {
                         value={formData.guests}
                         onChange={handleInputChange}
                       >
-                        <option value="1 Guest">1 Guest</option>
-                        <option value="2 Guests">2 Guests</option>
-                        <option value="3 Guests">3 Guests</option>
-                        <option value="4 Guests">4 Guests</option>
+                        <option value={`1 ${t.guestsCount}`}>1 {t.guestsCount}</option>
+                        <option value={`2 ${t.guestsCount}`}>2 {t.guestsCount}</option>
+                        <option value={`3 ${t.guestsCount}`}>3 {t.guestsCount}</option>
+                        <option value={`4 ${t.guestsCount}`}>4 {t.guestsCount}</option>
                       </select>
                     </div>
                   </div>
@@ -197,7 +214,7 @@ function App() {
                     className="btn btn-primary" 
                     style={{ marginTop: '10px', width: '100%' }}
                   >
-                    Confirm Booking Request
+                    {t.modalSubmit}
                   </button>
                 </form>
               </>
@@ -206,19 +223,19 @@ function App() {
                 <div className="success-icon-wrapper">
                   <Check size={40} />
                 </div>
-                <h3 className="modal-title">Booking Requested!</h3>
+                <h3 className="modal-title">{t.successTitle}</h3>
                 <p className="modal-desc" style={{ marginTop: '10px' }}>
-                  Thank you, <strong>{formData.fullName}</strong>. Your request to book the <strong>{selectedRoom}</strong> has been received. We have sent a confirmation email to <strong>{formData.email}</strong>.
+                  {getSuccessDesc1()}
                 </p>
                 <p className="modal-desc">
-                  Our staff will contact you shortly via <strong>{formData.phone}</strong> to confirm payment and check-in details.
+                  {getSuccessDesc2()}
                 </p>
                 <button 
                   className="btn btn-primary" 
                   style={{ marginTop: '20px', width: '100%' }}
                   onClick={closeModal}
                 >
-                  Back to Homepage
+                  {t.successBack}
                 </button>
               </div>
             )}

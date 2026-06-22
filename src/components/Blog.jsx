@@ -1,27 +1,27 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
-export default function Blog() {
+export default function Blog({ t }) {
   const posts = [
     {
       id: 1,
-      date: 'June 20, 2026',
-      title: 'Main Guest Opening: Wellness Resort',
-      desc: 'We are thrilled to announce the opening of our expanded outdoor thermal pool and herbal bath deck for all guests starting this summer.',
-      image: 'https://images.unsplash.com/photo-1551632811-561730d1e4a6?auto=format&fit=crop&w=600&q=80'
+      date: t.guestsCount === 'Khách' ? 'Ngày 20 tháng 6 năm 2026' : 'June 20, 2026',
+      title: t.post1Title,
+      desc: t.post1Desc,
+      image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=80'
     },
     {
       id: 2,
-      date: 'May 15, 2026',
-      title: 'Top 5 Mountain Trekking Trails in Da Lat',
-      desc: 'Discover the best hidden trails, pine forest walks, and misty mountain viewpoints near our homestay, curated by our expert guides.',
+      date: t.guestsCount === 'Khách' ? 'Ngày 15 tháng 5 năm 2026' : 'May 15, 2026',
+      title: t.post2Title,
+      desc: t.post2Desc,
       image: 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=600&q=80'
     },
     {
       id: 3,
-      date: 'April 28, 2026',
-      title: 'Sipping Local Coffee: Sapa Beans Tour',
-      desc: 'Explore the fascinating process of growing, harvesting, and roasting mountain coffee beans. Complimentary booking available for our guests.',
+      date: t.guestsCount === 'Khách' ? 'Ngày 28 tháng 4 năm 2026' : 'April 28, 2026',
+      title: t.post3Title,
+      desc: t.post3Desc,
       image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=600&q=80'
     }
   ];
@@ -29,8 +29,8 @@ export default function Blog() {
   return (
     <section id="blog" className="section-padding container">
       <div className="blog-header">
-        <span className="section-tag">Blog & Guide</span>
-        <h2 className="section-title">Latest From Our Blog</h2>
+        <span className="section-tag">{t.blogTag}</span>
+        <h2 className="section-title">{t.blogTitle}</h2>
       </div>
 
       <div className="blog-grid">
@@ -44,7 +44,7 @@ export default function Blog() {
               <h3 className="blog-title">{post.title}</h3>
               <p className="blog-desc">{post.desc}</p>
               <a href="#blog" className="blog-link">
-                Read Article <ArrowRight size={14} />
+                {t.blogCta} <ArrowRight size={14} />
               </a>
             </div>
           </article>

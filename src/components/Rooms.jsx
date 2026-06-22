@@ -1,46 +1,46 @@
 import React from 'react';
 import { Maximize2, Users, Star, ArrowRight } from 'lucide-react';
 
-export default function Rooms({ onBookSelect }) {
+export default function Rooms({ onBookSelect, t }) {
   const rooms = [
     {
       id: 'luxe-family-suite',
-      title: 'Luxe Family Suite',
+      title: t.roomLuxeFamily,
       image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
       size: '55 m²',
-      guests: '4 Guests',
-      rating: '5.0 (28 reviews)',
-      price: '$120',
+      guests: `4 ${t.guestsCount}`,
+      rating: `5.0 (28 ${t.reviewsCount})`,
+      price: t.guestsCount === 'Khách' ? '3.000.000 ₫' : '$120',
       layout: 'large'
     },
     {
       id: 'twin-cozy-suite',
-      title: 'Twin Cozy Suite',
+      title: t.roomTwinCozy,
       image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80',
       size: '35 m²',
-      guests: '2 Guests',
-      rating: '4.9 (18 reviews)',
-      price: '$80',
+      guests: `2 ${t.guestsCount}`,
+      rating: `4.9 (18 ${t.reviewsCount})`,
+      price: t.guestsCount === 'Khách' ? '2.000.000 ₫' : '$80',
       layout: 'small'
     },
     {
       id: 'deluxe-double-room',
-      title: 'Deluxe Double Room',
+      title: t.roomDeluxeDouble,
       image: 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80',
       size: '42 m²',
-      guests: '2 Guests',
-      rating: '4.8 (24 reviews)',
-      price: '$95',
-      layout: 'large' // Spans left bottom
+      guests: `2 ${t.guestsCount}`,
+      rating: `4.8 (24 ${t.reviewsCount})`,
+      price: t.guestsCount === 'Khách' ? '2.400.000 ₫' : '$95',
+      layout: 'large'
     },
     {
       id: 'light-single-room',
-      title: 'Light Single Room',
+      title: t.roomLightSingle,
       image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
       size: '25 m²',
-      guests: '1 Guest',
-      rating: '4.7 (12 reviews)',
-      price: '$55',
+      guests: `1 ${t.guestsCount}`,
+      rating: `4.7 (12 ${t.reviewsCount})`,
+      price: t.guestsCount === 'Khách' ? '1.400.000 ₫' : '$55',
       layout: 'small'
     }
   ];
@@ -50,12 +50,10 @@ export default function Rooms({ onBookSelect }) {
       <div className="container">
         <div className="rooms-header">
           <div>
-            <span className="section-tag">Our Cabins</span>
-            <h2 className="section-title">Choose Your Cozy Space</h2>
+            <span className="section-tag">{t.roomsTag}</span>
+            <h2 className="section-title">{t.roomsTitle}</h2>
           </div>
-          <p className="rooms-header-right">
-            Every room at GenX PKS Homestay has been meticulously crafted with local pine wood, custom handcrafted furniture, and modern heating systems to guarantee a magical mountain stay.
-          </p>
+          <p className="rooms-header-right">{t.roomsDesc}</p>
         </div>
 
         <div className="rooms-grid">
@@ -90,13 +88,13 @@ export default function Rooms({ onBookSelect }) {
 
                   <div className="room-price-book">
                     <div className="room-price">
-                      {room.price} <span>/ night</span>
+                      {room.price} <span>{t.perNight}</span>
                     </div>
                     <button 
                       className="room-book-link"
                       onClick={() => onBookSelect(room.title)}
                     >
-                      Book Now <ArrowRight size={14} />
+                      {t.bookNow} <ArrowRight size={14} />
                     </button>
                   </div>
                 </div>

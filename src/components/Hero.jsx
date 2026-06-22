@@ -1,20 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function Hero({ onBookClick }) {
+export default function Hero({ onBookClick, t }) {
+  const slides = [
+    'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1600&q=80',
+    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80',
+    'https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?auto=format&fit=crop&w=1600&q=80'
+  ];
+
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
   return (
-    <section 
-      id="hero" 
-      className="hero" 
-      style={{ backgroundImage: `url('https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1600&q=80')` }}
-    >
+    <section id="hero" className="hero">
+      {/* Background Slideshow Layers */}
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={`hero-bg-slide ${index === activeSlide ? 'active' : ''}`}
+          style={{ backgroundImage: `url('${slide}')` }}
+        />
+      ))}
+
       <div className="hero-overlay"></div>
+      
       <div className="container hero-content animate-fade-in">
-        <h1 className="hero-title">GenX PKS Homestay</h1>
-        <div className="hero-subtitle">More Than A Stay</div>
-        <p className="hero-desc">
-          Nestled in the breathtaking Sapa-Da Lat mountain range, our premium homestay offers cozy cabins, luxury rooms, warm local fireplaces, and panoramic nature views. Escape the hustle of the city and reconnect with nature in absolute comfort.
-        </p>
-        <button className="btn btn-primary" onClick={onBookClick}>Discover Your Cabin</button>
+        <h1 className="hero-title">{t.heroTitle}</h1>
+        <div className="hero-subtitle">{t.heroSubtitle}</div>
+        <p className="hero-desc">{t.heroDesc}</p>
+        <button className="btn btn-primary" onClick={onBookClick}>{t.heroCta}</button>
         
         <div className="hero-spinner-container">
           <div className="hero-spinner">
@@ -26,7 +45,7 @@ export default function Hero({ onBookClick }) {
               />
               <text fill="#C5A880" fontSize="7.8" fontWeight="600" letterSpacing="2">
                 <textPath href="#textPath">
-                  • SCROLL DOWN TO EXPLORE • GENX PKS HOMESTAY •
+                  {t.heroScroll}
                 </textPath>
               </text>
             </svg>

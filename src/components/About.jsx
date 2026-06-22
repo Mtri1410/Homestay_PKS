@@ -1,28 +1,24 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
 
-export default function About() {
+export default function About({ t }) {
   const features = [
-    'Breathtaking Mountain Views',
-    'Heated Cozy Fireplaces',
-    'Local Organic Dining',
-    'Premium Wellness Spa',
-    'Guided Trekking & Tours',
-    'High-Speed Complimentary Wi-Fi'
+    t.aboutFeature1,
+    t.aboutFeature2,
+    t.aboutFeature3,
+    t.aboutFeature4,
+    t.aboutFeature5,
+    t.aboutFeature6
   ];
 
   return (
     <section id="about" className="section-padding container">
       <div className="about-grid">
         <div className="about-text">
-          <span className="section-tag">About Us</span>
-          <h2 className="section-title">Enjoy Vacations With GenX PKS Homestay</h2>
-          <p className="about-desc">
-            Welcome to GenX PKS Homestay, where modern luxury meets the rustic charm of the mountains. Our boutique homestay is designed for travelers who appreciate the serenity of nature without sacrificing the comforts of home. We offer fully equipped cabins and suites, bespoke dining options, and warm hospitality.
-          </p>
-          <p className="about-desc" style={{ marginBottom: '30px' }}>
-            Whether you want to witness the misty sunrise over the valleys, enjoy a cup of fresh locally sourced coffee, or unwind by a bonfire, we provide an unforgettable escape.
-          </p>
+          <span className="section-tag">{t.aboutTag}</span>
+          <h2 className="section-title">{t.aboutTitle}</h2>
+          <p className="about-desc">{t.aboutDesc1}</p>
+          <p className="about-desc" style={{ marginBottom: '30px' }}>{t.aboutDesc2}</p>
           
           <div className="about-features">
             {features.map((feature, idx) => (
@@ -33,7 +29,7 @@ export default function About() {
             ))}
           </div>
 
-          <a href="#rooms" className="btn btn-primary">Choose Your Room</a>
+          <a href="#rooms" className="btn btn-primary">{t.aboutRoomCta}</a>
         </div>
 
         <div className="organic-img-frame">

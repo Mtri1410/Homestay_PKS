@@ -8,7 +8,7 @@ const InstaIcon = ({ size = 20 }) => (
   </svg>
 );
 
-export default function Instagram() {
+export default function Instagram({ t }) {
   const images = [
     'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=400&q=80', // canoeing
     'https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=400&q=80', // cocktail bar
@@ -21,7 +21,7 @@ export default function Instagram() {
     <section className="instagram-section container">
       <div className="instagram-header">
         <span className="section-tag" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-          <InstaIcon size={16} /> Follow Us
+          <InstaIcon size={16} /> {t.instaTag}
         </span>
         <h2 className="section-title" style={{ fontSize: '1.8rem', marginTop: '8px' }}>
           @genx.pks.homestay
